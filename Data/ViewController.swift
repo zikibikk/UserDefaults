@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Data
-//
-//  Created by Alina Bikkinina on 02.11.2021.
-//
-
 import UIKit
 
 enum UserDefaultsKeys {
@@ -21,11 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        userDefaults.set("8909", forKey: UserDefaultsKeys.phoneNumber)
-//        userDefaults.set("ema", forKey: UserDefaultsKeys.email)
-//        userDefaults.set("mama", forKey: UserDefaultsKeys.controlQuestion)
-        
-        let userSettings = UserAppSettings(phoneNumber: "8909", email: "ema", controlQuestion: "mama")
+        let userSettings = UserAppSettings(phoneNumber: "8909", email: "ema", controlQuestion: "mama", notification: .init(phoneNumber: "999", email: "maile"))
         let encoder = JSONEncoder()
         let encodeUserSettings = try? encoder.encode(userSettings)
         userDefaults.set(encodeUserSettings, forKey: UserDefaultsKeys.userSettings)
@@ -35,11 +24,12 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        let phoneNumber = userDefaults.string(forKey: UserDefaultsKeys.phoneNumber)
         let userData = userDefaults.value(forKey: UserDefaultsKeys.userSettings) as! Data
         let decoder = JSONDecoder()
         let userAppSettingsData = try! decoder.decode(UserAppSettings.self, from: userData)
         print(userAppSettingsData)
+        
+        
     }
 
 
